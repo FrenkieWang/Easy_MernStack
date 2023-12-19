@@ -2,11 +2,7 @@ This is a full-stack project.
 
 MongoDB(database)
 
-       |
-
 NodeJS + ExpressJS(Backend)
-
-       |
 
 React Framework(Frontend)
 
