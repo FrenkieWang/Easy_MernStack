@@ -1,7 +1,34 @@
-Code for MERN tutorial.
+This is a full-stack project.
+MongoDB(database)
+       |
+NodeJS + ExpressJS(Backend)
+       |
+React Framework(Frontend)
 
-Video Tutorial: https://www.youtube.com/watch?v=7CqJlxBYj-M
+## List
 
-Article Tutorial: https://medium.com/@beaucarnes/learn-the-mern-stack-by-building-an-exercise-tracker-mern-tutorial-59c13c1237a1
+There are 6 files in Backend.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Backend/
+|-- models/
+|   |-- exerciseModel.js
+|   |-- userModel.js
+|
+|-- routes/
+|   |-- exerciseRoute.js
+|   |-- userRoute.js
+|
+|-- .env
+|-- server.js
+
+There are 6 files in Frontend.
+
+Frontend/src/
+|-- components/
+|   |-- CreateUser.js
+|   |-- CreateExercise.js
+|   |-- EditExercise.js
+|   |-- ExerciseList.js
+|   |-- Navbar.js
+| 
+|-- App.js
