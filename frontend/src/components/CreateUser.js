@@ -1,22 +1,30 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from 'axios';
 import {useState, useRef} from 'react';
 
 function CreateUser(){
-  const [username, setUsername] = useState('');
-  const usernameRef = useRef(null);
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
+  const firstnameRef = useRef(null);
+  const lastnameRef = useRef(null);
 
 
-  function onChangeUsername() {
-    setUsername(usernameRef.current.value);
-    console.log(username);
+  function onChangeFirstname() {
+    setFirstname(firstnameRef.current.value);
+    console.log(firstname);
+  }
+
+  function onChangeLastname() {
+    setLastname(lastnameRef.current.value);
+    console.log(lastname);
   }
 
   function onSubmit(e) {
     e.preventDefault();
 
     const user = {
-      username: username
+      fname: firstname,
+      lname: lastname
     }
 
     console.log(user);
@@ -24,7 +32,8 @@ function CreateUser(){
     axios.post('http://localhost:5000/users/add', user)
       .then(res => console.log(res.data));
 
-    setUsername('');
+    setFirstname('');
+    setLastname('');
   }
 
   return (
@@ -32,12 +41,23 @@ function CreateUser(){
       <h3>Create New User</h3>
       <form onSubmit={onSubmit}>
         <div className="form-group"> 
-          <label>Username: </label>
+          <label>First name: </label>
           <input  type="text"
               required
               className="form-control"
-              ref = {usernameRef}
-              onChange={onChangeUsername}
+              value = {firstname}
+              ref = {firstnameRef}
+              onChange={onChangeFirstname}
+              />
+        </div>
+        <div className="form-group"> 
+          <label>Last name: </label>
+          <input  type="text"
+              required
+              className="form-control"
+              value = {lastname}
+              ref = {lastnameRef}
+              onChange={onChangeLastname}
               />
         </div>
         <div className="form-group">

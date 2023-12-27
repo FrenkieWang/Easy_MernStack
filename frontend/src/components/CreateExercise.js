@@ -19,8 +19,9 @@ function CreateExercise() {
     axios.get('http://localhost:5000/users/')
     .then(response => {
       if (response.data.length > 0) {
-        setUsers(response.data.map(user => user.username));
-        setUsername(response.data[0].username);
+        console.log(response.data);
+        setUsers(response.data.map((user) => (user.fname + " " + user.lname)));
+        setUsername(response.data[0].fname + " " + response.data[0].lname);
       }
     })
     .catch((error) => {
@@ -75,9 +76,9 @@ function CreateExercise() {
               value = {username}
               onChange={onChangeUsername}>
               {
-                users.map((user) => (
+                users.map((user, index) => (
                   <option 
-                    key={user}
+                    key={index}
                     value={user}>{user}
                   </option>
                 ))

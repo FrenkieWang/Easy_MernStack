@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
@@ -33,7 +33,7 @@ function EditExercise() {
     axios.get('http://localhost:5000/users/')
       .then(response => {
         if (response.data.length > 0) {
-          setUsers(response.data.map(user => user.username));
+          setUsers(response.data.map((user) => (user.fname + " " + user.lname)));
         }
       })
       .catch((error) => {
@@ -89,9 +89,9 @@ function EditExercise() {
               value = {username}
               onChange={onChangeUsername}>
               {
-                users.map((user) => (
+                users.map((user, index) => (
                   <option 
-                    key={user}
+                    key={index}
                     value={user}>{user}
                   </option>
                 ))
