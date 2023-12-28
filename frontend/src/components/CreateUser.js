@@ -5,18 +5,30 @@ import {useState, useRef} from 'react';
 function CreateUser(){
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+
   const firstnameRef = useRef(null);
   const lastnameRef = useRef(null);
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
 
 
   function onChangeFirstname() {
     setFirstname(firstnameRef.current.value);
-    console.log(firstname);
   }
 
   function onChangeLastname() {
     setLastname(lastnameRef.current.value);
-    console.log(lastname);
+  }
+
+  function onChangeEmail() {
+    setEmail(emailRef.current.value);
+  }
+
+  function onChangePassword() {
+    setPassword(passwordRef.current.value);
   }
 
   function onSubmit(e) {
@@ -24,7 +36,9 @@ function CreateUser(){
 
     const user = {
       fname: firstname,
-      lname: lastname
+      lname: lastname,
+      email: email,
+      password: password
     }
 
     console.log(user);
@@ -34,6 +48,8 @@ function CreateUser(){
 
     setFirstname('');
     setLastname('');
+    setEmail('');
+    setPassword('');
   }
 
   return (
@@ -48,7 +64,7 @@ function CreateUser(){
               value = {firstname}
               ref = {firstnameRef}
               onChange={onChangeFirstname}
-              />
+          />
         </div>
         <div className="form-group"> 
           <label>Last name: </label>
@@ -58,7 +74,27 @@ function CreateUser(){
               value = {lastname}
               ref = {lastnameRef}
               onChange={onChangeLastname}
-              />
+          />
+        </div>
+        <div className="form-group"> 
+          <label>Email Address: </label>
+          <input  type="email"
+              required
+              className="form-control"
+              value = {email}
+              ref = {emailRef}
+              onChange={onChangeEmail}
+          />
+        </div>
+        <div className="form-group"> 
+          <label>Password: </label>
+          <input  type="password"
+              required
+              className="form-control"
+              value = {password}
+              ref = {passwordRef}
+              onChange={onChangePassword}
+          />
         </div>
         <div className="form-group">
           <input type="submit" value="Create User" className="btn btn-primary" />
