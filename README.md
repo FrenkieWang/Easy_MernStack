@@ -7,11 +7,11 @@ This is an open-book, graded examination coding assignment. You may use online r
 
 You are required to develop a solution for this coding assignment in three components:
 
-a. A solution database which appropriately models the data required for the coding assignment. The solution database may be implemented using either MySQL or MongoDB.
+- (a). A solution database which appropriately models the data required for the coding assignment. The solution database may be implemented using either MySQL or MongoDB.
 
-b. A solution REST API that provides CRUD functionality for interacting with the solution database. The API may be implemented using PHP or NodeJS/Express.
+- (b). A solution REST API that provides CRUD functionality for interacting with the solution database. The API may be implemented using PHP or NodeJS/Express.
 
-(c). A User Interface (UI) which demonstrates (i) consumption of the REST API and (ii) implements the requested functionality detailed in the assignment brief that follows. You may implement your UI using PHP, or using ExpressJS in conjunction with a templating engine of your choosing.
+- (c). A User Interface (UI) which demonstrates (i) consumption of the REST API and (ii) implements the requested functionality detailed in the assignment brief that follows. You may implement your UI using PHP, or using ExpressJS in conjunction with a templating engine of your choosing.
 
 Note that you do not have to use the same programming language throughout. It is perfectly acceptable to use PHP, say, to implement the UI and NodeJS/ExpressJS to implement the REST API, or vice versa. Or you may choose to develop an entirely PHP solution, It is important, however, that there is a clear separation between the REST API and the UI that consumes the API,
 
