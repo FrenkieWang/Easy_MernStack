@@ -1,7 +1,7 @@
 This Exam Coding Assignment is worth 30% of Final CS230 Examination Mark.
 
 This is an open-book, graded examination coding assignment. You may use online resources for reference purposes only to help with the examination assignment. Please cite all references as comments in your submissions. You cannot directly reuse HTML/CSS/JS **solution code** from online sources. **You must not engage with another student, in person or electronically (phone, social media, etc.) to secure assistance with this assignment. If you do so you will receive an automatic fail (0%)**. We will perform similarity checks on submitted assignments to check for collaborative efforts. A reasonable attempt at this assignment will gain you 30% of your final CS230 Examination Mark.
-
+<br>
 
 **Coding Examination-Develop a Database, a REST API, and a User Interface (UI)** 
 
@@ -16,7 +16,7 @@ You are required to develop a solution for this coding assignment in three compo
 Note that you do not have to use the same programming language throughout. It is perfectly acceptable to use PHP, say, to implement the UI and NodeJS/ExpressJS to implement the REST API, or vice versa. Or you may choose to develop an entirely PHP solution, It is important, however, that there is a clear separation between the REST API and the UI that consumes the API,
 
 Components (a), (b) and (c) are equally weighted at 10% for a fully functioning solution. You may decide to focus on one, two or three components. However, an important constraint for this assignment is that the components must be interoperable (work together) in order to secure maximum marks. Fully functional, standalone components will not receive 10%; they will receive 5% maximum, with the remaining 5% allocated to functioning correctly in a complete solution context.
-
+<br>
 
 **Coding Examination-Requirements**
 
@@ -35,11 +35,9 @@ Date of Birth*, Parent/Guardian Name if under 18*, Permission to leave message b
 For **Therapy Sessions(sessions)**, your solution manages the following session information:
 
 3. Session Date*, Session Time*， Client(s)*, Therapist*，Fee (€)", Session Number*，
-Session Attendance* with options [Attended, Cancelled, No Show], Session Type* with options [Intake, Psychotherapy, Assessment, Other(specify)], and Session Notes*. When "Other(specify)" is selected the form should provide a text-input field to
-record the user input for this detail. You may record "Gender" using your personal preferred approach,i.e.as free text or using a list of your preferred options. **The fields marked * are required fields,i.e. they must contain values. You must validate forms prior to submission.**
+Session Attendance* with options [Attended, Cancelled, No Show], Session Type* with options [Intake, Psychotherapy, Assessment, Other(specify)], and Session Notes*. When "Other(specify)" is selected the form should provide a text-input field to record the user input for this detail. You may record "Gender" using your personal preferred approach,i.e.as free text or using a list of your preferred options. **The fields marked * are required fields,i.e. they must contain values. You must validate forms prior to submission.**
 
 4. There will be at least one client in attendance per session, with a maximum of three clients permissible. There will only be one therapist in attendance. For "Session Notes", you need to accommodate text notes only. Your solution is not required to provide a document upload facility.
-
 
 5. As Clients normally typically attend several sessions the session number is important. Your solution is not required to automatically calculate the current session number. This can be set manually using the online form. 
 
@@ -55,7 +53,6 @@ You may implement your User Interface using HTML/CSS/JS, PHP, or using ExpressJS
 
 (iii) You may write, or reuse, previously personally developed functions to randomly create personal and address data; for speed, it may be appropriate to use the NodeJS package, faker.js, as shown in Lecture 24 Lesson 02. **Your solution should include complete personal data for, at least six therapists, at least ten clients, and at least twelve sessions**.
 
-
 (iv) Your code should include a brief description of the database design (your data modelling approach) and the Impact on your REST API development. This should be included as a comment at the bottom of your REST API code submission.
 
 (v) For this examination coding assignment your solution should **validate data** in both the User Interface and the REST API in order to secure maximum marks.
@@ -65,7 +62,7 @@ You may implement your User Interface using HTML/CSS/JS, PHP, or using ExpressJS
 (vii)Your solution must "hard-code" your database authentication details into your application (in the App or in a loaded file). If you are using the MongoDB Cloud Atlas database hosting service you must allow access from anywhere(whitelist 0.0.0.0). It will be necessary to access to your database in order to correct your assignment. **Please note that you must use a remotely accessible database for this examination. If it is not possible to access your database you will not be awarded marks for this part of the coding assignment. As a backup, please extract and include your database with your submission. Do not use a locally hosted database for this assignment.** 
 
 Please note that there are many sample (JS, PHP)solutions for implementing similar solutions, using REST functionality, available online. While it is fine to consult these, and accompanying articles, for references, you may not re-use code from these projects. Please **cite your reference sources** in your codebase. We will search and identify online coding solutions to similar problems for the purposes of checking against submitted solutions in instances where we have concerns about code originality. It is fine to reuse your earlier assginment code, but not the working code submitted previously by peers. We will consult earlier assignments if we have concerns about plagiarism.
-
+<br>
 
 **IMPORTANT SUBMISSION DETAILS**
 
