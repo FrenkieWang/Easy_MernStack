@@ -3,7 +3,7 @@ This Exam Coding Assignment is worth 30% of Final CS230 Examination Mark.
 This is an open-book, graded examination coding assignment. You may use online resources for reference purposes only to help with the examination assignment. Please cite all references as comments in your submissions. You cannot directly reuse HTML/CSS/JS **solution code** from online sources. **You must not engage with another student, in person or electronically (phone, social media, etc.) to secure assistance with this assignment. If you do so you will receive an automatic fail (0%)**. We will perform similarity checks on submitted assignments to check for collaborative efforts. A reasonable attempt at this assignment will gain you 30% of your final CS230 Examination Mark.
 
 
-### Coding Examination-Develop a Database, a REST API, and a User Interface (UI) ### 
+### Coding Examination-Develop a Database, a REST API, and a User Interface (UI)
 
 You are required to develop a solution for this coding assignment in three components:
 
@@ -18,7 +18,7 @@ Note that you do not have to use the same programming language throughout. It is
 Components (a), (b) and (c) are equally weighted at 10% for a fully functioning solution. You may decide to focus on one, two or three components. However, an important constraint for this assignment is that the components must be interoperable (work together) in order to secure maximum marks. Fully functional, standalone components will not receive 10%; they will receive 5% maximum, with the remaining 5% allocated to functioning correctly in a complete solution context.
 
 
-**Coding Examination-Requirements**
+### Coding Examination-Requirements
 
 You are required to develop a solution that implements a prototype Client-Therapist Session Management System for a hypothetical Psychotherapy and Counselling Service. Your solution should provide a fully working UI (user Interface), REST API and DB (database) for the required functionality outlined below.
 
@@ -45,7 +45,7 @@ Your solution's RESTful API(for example, created using PHP or NodeJS/ExpressJS/e
 
 You may implement your User Interface using HTML/CSS/JS, PHP, or using ExpressJS in conjunction with a templating engine of your choosing. User Interface solutions may use jQuery and Bootstrap. Docker solutions are not permitted. Solutions realised using AngularJS orReactlS, must provide detailed working (and tested) setup instructions with the submission, or it will not be possible to test; grading will then be based on a code review only.
 
-**Coding Examination - Additional Notes**
+### Coding Examination - Additional Notes
 
 - (i) Please note that you should implement best practices when it comes to database design for this assignment,i.e., you may choose to have normalised or de-normalised models, or a combination approach depending on your choice of database management system (MySQL or MongoDB).
 
@@ -64,7 +64,7 @@ You may implement your User Interface using HTML/CSS/JS, PHP, or using ExpressJS
 Please note that there are many sample (JS, PHP)solutions for implementing similar solutions, using REST functionality, available online. While it is fine to consult these, and accompanying articles, for references, you may not re-use code from these projects. Please **cite your reference sources** in your codebase. We will search and identify online coding solutions to similar problems for the purposes of checking against submitted solutions in instances where we have concerns about code originality. It is fine to reuse your earlier assginment code, but not the working code submitted previously by peers. We will consult earlier assignments if we have concerns about plagiarism.
 
 
-**IMPORTANT SUBMISSION DETAILS**
+### IMPORTANT SUBMISSION DETAILS
 
 **Before submitting your coding assignment, students should check that their solution works in Chrome and/or Firefox. Please indicate the Browser, Operating System (Linux/Windows/MacOS) and Browser version used for testing (as a comment in your submitted code).**
 
