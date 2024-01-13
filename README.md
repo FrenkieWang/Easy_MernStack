@@ -3,7 +3,7 @@ This Exam Coding Assignment is worth 30% of Final CS230 Examination Mark.
 This is an open-book, graded examination coding assignment. You may use online resources for reference purposes only to help with the examination assignment. Please cite all references as comments in your submissions. You cannot directly reuse HTML/CSS/JS **solution code** from online sources. **You must not engage with another student, in person or electronically (phone, social media, etc.) to secure assistance with this assignment. If you do so you will receive an automatic fail (0%)**. We will perform similarity checks on submitted assignments to check for collaborative efforts. A reasonable attempt at this assignment will gain you 30% of your final CS230 Examination Mark.
 
 
-**Coding Examination-Develop a Database, a REST API, and a User Interface (UI)** 
+### **Coding Examination-Develop a Database, a REST API, and a User Interface (UI)** ### 
 
 You are required to develop a solution for this coding assignment in three components:
 
