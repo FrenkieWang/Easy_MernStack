@@ -3,9 +3,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 
 import Navbar from "./components/Navbar"
-import ExercisesList from "./components/ExercisesList";
-import EditExercise from "./components/EditExercise";
-import CreateExercise from "./components/CreateExercise";
+import TherapistsList from "./components/therapist/TherapistsList";
+import EditTherapist from "./components/therapist/EditTherapist";
+import CreateTherapist from "./components/therapist/CreateTherapist";
 import CreateUser from "./components/CreateUser";
 
 function App() {
@@ -15,9 +15,9 @@ function App() {
       <Navbar />
       <br/>
       <Routes>
-        <Route path="/" element={<ExercisesList/>} />
-        <Route path="/edit/:id" element={<EditExercise/>} />
-        <Route path="/create" element={<CreateExercise/>} />
+        <Route path="/therapist" element={<TherapistsList/>} />
+        <Route path="/therapist/edit/:id" element={<EditTherapist/>} />
+        <Route path="/therapist/create" element={<CreateTherapist/>} />
         <Route path="/user" element={<CreateUser/>} />
       </Routes>
        </div>
