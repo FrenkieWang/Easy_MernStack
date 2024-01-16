@@ -6,7 +6,6 @@ import Navbar from "./components/Navbar"
 import TherapistsList from "./components/therapist/TherapistsList";
 import EditTherapist from "./components/therapist/EditTherapist";
 import CreateTherapist from "./components/therapist/CreateTherapist";
-import CreateUser from "./components/CreateUser";
 
 function App() {
   return (
