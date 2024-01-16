@@ -18,7 +18,6 @@ function App() {
         <Route path="/therapist" element={<TherapistsList/>} />
         <Route path="/therapist/edit/:id" element={<EditTherapist/>} />
         <Route path="/therapist/create" element={<CreateTherapist/>} />
-        <Route path="/user" element={<CreateUser/>} />
       </Routes>
        </div>
     </Router>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import {useState, useEffect} from 'react';
+import TherapistAddress from './TherapistAddress';
 
 function TherapistsList(){
   const [therapists, setTherapists] = useState([]);
@@ -68,17 +69,13 @@ function TherapistsList(){
         </tbody>
       </table>
 
-      {isModalOpen && selectedTherapist && (
-        <div>
-          <h4>{`Address of ${selectedTherapist.firstName} ${selectedTherapist.surName}`}</h4>
-          <p>{selectedTherapist.homeAddress.addressLine1}</p>
-          <p>{selectedTherapist.homeAddress.addressLine2}</p>
-          <p>{selectedTherapist.homeAddress.town}</p>
-          <p>{selectedTherapist.homeAddress.countyCity}</p>
-          <p>{selectedTherapist.homeAddress.eircode}</p>
-          <button onClick={closeModal}>Close</button>
-        </div>
-      )}
+      {/* The PopUp Window of Address */}
+      {isModalOpen && selectedTherapist && 
+        <TherapistAddress
+          selectedTherapist={selectedTherapist} 
+          closeModal={closeModal}
+        />
+      }
     </div>
   )  
 }
