@@ -11,7 +11,7 @@ const RequiredStar = styled.span`
 
 function CreateTherapist() {
   const [therapist, setTherapist] = useState({
-    title: '',
+    title: 'Mx',
     titleOther: '',
     firstName: '',
     surname: '',

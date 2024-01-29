@@ -1,8 +1,7 @@
 import React from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
-import {useState, useEffect} from 'react';
-import {useParams} from 'react-router-dom';
+import axios from 'axios';
+import {useState} from 'react';
 import styled from 'styled-components';
 
 // Create a styled span for the red asterisk
@@ -10,8 +9,8 @@ const RequiredStar = styled.span`
   color: red;
 `;
 
-function EditTherapist() {
-  const [therapist, setTherapist] = useState({
+function CreateClient() {
+  const [client, setClient] = useState({
     title: 'Mx',
     titleOther: '',
     firstName: '',
@@ -27,32 +26,20 @@ function EditTherapist() {
     }
   });
 
-  let { id } = useParams();
-
-  useEffect(( ) => {
-    axios.get('http://localhost:5000/therapists/'+ id)
-      .then(response => {
-        setTherapist(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
-
-  },[id])
-
-  function onChangeTherapist(e){
+  // Handler for changes 
+  function onChangeClient(e){
     const { name, value } = e.target;
     if (name.startsWith("homeAddress.")) {
-      setTherapist(prevTherapist => ({
-        ...prevTherapist,
+      setClient(prevClient => ({
+        ...prevClient,
         homeAddress: {
-          ...prevTherapist.homeAddress,
+          ...prevClient.homeAddress,
           [name.split(".")[1]]: value
         }
       }));
     } else {
-      setTherapist(prevTherapist => ({
-        ...prevTherapist,
+      setClient(prevClient => ({
+        ...prevClient,
         [name]: value
       }));
     }
@@ -61,29 +48,28 @@ function EditTherapist() {
   function onSubmit(e) {
     e.preventDefault();
 
-    console.log(therapist);
+    console.log(client);
 
-    axios.post('http://localhost:5000/therapists/update/' + id, therapist)
+    axios.post('http://localhost:5000/clients/add', client)
       .then(res => console.log(res.data))
       .catch(error => console.log(error));
 
-    window.location = '/therapist';
+    // window.location = '/client';
   }
-
 
   return (
     <div>
-      <h3>Edit Exercise Log</h3>
-      <form onSubmit={onSubmit}>        
-        {/* Therapist Information */}
+      <h3>Create New Client</h3>
+      <form onSubmit={onSubmit}>
+        {/* Client Information */}
         <div className="form-group">
           <label>Title:<RequiredStar>*</RequiredStar> </label>
           <select
             required
             name="title"
             className="form-control"
-            value={therapist.title}
-            onChange={onChangeTherapist}
+            value={client.title}
+            onChange={onChangeClient}
           >
             <option value="Mx">Mx</option>
             <option value="Ms">Ms</option>
@@ -94,15 +80,15 @@ function EditTherapist() {
             <option value="Other">Other</option>
           </select>
         </div>
-        {therapist.title === 'Other' && (
+        {client.title === 'Other' && (
           <div className="form-group"> 
             <label>Title Other: </label>
             <input
               type="text"
               name="titleOther"
               className="form-control" 
-              value={therapist.titleOther} 
-              onChange={onChangeTherapist}
+              value={client.titleOther} 
+              onChange={onChangeClient}
             />
           </div>
         )}
@@ -112,8 +98,8 @@ function EditTherapist() {
             type="text"
             name="firstName"
             className="form-control" 
-            value={therapist.firstName} 
-            onChange={onChangeTherapist}
+            value={client.firstName} 
+            onChange={onChangeClient}
           />
         </div>
         <div className="form-group"> 
@@ -122,8 +108,8 @@ function EditTherapist() {
             type="text"
             name="surName"
             className="form-control" 
-            value={therapist.surName} 
-            onChange={onChangeTherapist}
+            value={client.surName} 
+            onChange={onChangeClient}
           />
         </div>
         <div className="form-group"> 
@@ -132,8 +118,8 @@ function EditTherapist() {
             type="text"
             name="phoneNumber"
             className="form-control" 
-            value={therapist.phoneNumber} 
-            onChange={onChangeTherapist} 
+            value={client.phoneNumber} 
+            onChange={onChangeClient} 
           />
         </div>
         <div className="form-group"> 
@@ -142,8 +128,8 @@ function EditTherapist() {
             type="email"
             name="email"
             className="form-control" 
-            value={therapist.email} 
-            onChange={onChangeTherapist}
+            value={client.email} 
+            onChange={onChangeClient}
           />
         </div>
 
@@ -154,8 +140,8 @@ function EditTherapist() {
             type="text"
             name="homeAddress.addressLine1"
             className="form-control"
-            value={therapist.homeAddress.addressLine1}
-            onChange={onChangeTherapist}
+            value={client.homeAddress.addressLine1}
+            onChange={onChangeClient}
           />
         </div>
         <div className="form-group">
@@ -164,8 +150,8 @@ function EditTherapist() {
             type="text"
             name="homeAddress.addressLine2"
             className="form-control"
-            value={therapist.homeAddress.addressLine2}
-            onChange={onChangeTherapist}
+            value={client.homeAddress.addressLine2}
+            onChange={onChangeClient}
           />
         </div>
         <div className="form-group">
@@ -174,8 +160,8 @@ function EditTherapist() {
             type="text"
             name="homeAddress.town"
             className="form-control"
-            value={therapist.homeAddress.town}
-            onChange={onChangeTherapist}
+            value={client.homeAddress.town}
+            onChange={onChangeClient}
           />
         </div>
         <div className="form-group">
@@ -184,8 +170,8 @@ function EditTherapist() {
             type="text"
             name="homeAddress.countyCity"
             className="form-control"
-            value={therapist.homeAddress.countyCity}
-            onChange={onChangeTherapist}
+            value={client.homeAddress.countyCity}
+            onChange={onChangeClient}
           />
         </div>
         <div className="form-group">
@@ -194,18 +180,18 @@ function EditTherapist() {
             type="text"
             name="homeAddress.eircode"
             className="form-control"
-            value={therapist.homeAddress.eircode}
-            onChange={onChangeTherapist}
+            value={client.homeAddress.eircode}
+            onChange={onChangeClient}
           />
         </div>
-
+        
         <div className="form-group">
-          <input type="submit" value="Edit Exercise Log" className="btn btn-primary" />
+          <input type="submit" value="Create Client" className="btn btn-primary" />
         </div>
-        <Link to="/therapist" >Back to Therapist List</Link>
+        <Link to="/client" >Back to Client List</Link>
       </form>
     </div>
   )  
 }
 
-export default EditTherapist;
+export default CreateClient;
