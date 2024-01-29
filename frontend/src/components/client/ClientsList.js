@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import {useState, useEffect} from 'react';
 import ClientAddress from './ClientAddress';
+import ClientAdditionalList from './ClientAdditionalList';
 
 function ClientsList(){
   const [clients, setClients] = useState([]);
   const [selectedClient, setSelectedClient] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
+  const [isAdditionalModalOpen, setIsAdditionalModalOpen] = useState(false);
 
   useEffect(( ) => {
     axios.get('http://localhost:5000/clients/')
@@ -26,13 +28,19 @@ function ClientsList(){
     setClients(clients.filter(el => el._id !== id));
   }
 
+  function showAdditionalModal(client){
+    setSelectedClient(client);
+    setIsAdditionalModalOpen(true);
+  }
+
   function showAddressModal(client){
     setSelectedClient(client);
-    setIsModalOpen(true);
+    setIsAddressModalOpen(true);
   }
 
   function closeModal(){
-    setIsModalOpen(false);
+    setIsAdditionalModalOpen(false);
+    setIsAddressModalOpen(false);
   }
 
   return (
@@ -46,6 +54,7 @@ function ClientsList(){
             <th>Name</th>
             <th>Phone Number</th>
             <th>Email</th>
+            <th>Additional Info</th>
             <th>Address</th>
             <th>Actions</th>
           </tr>
@@ -58,6 +67,9 @@ function ClientsList(){
               <td>{currentclient.phoneNumber}</td>
               <td>{currentclient.email}</td>
               <td>
+                <button onClick={() => showAdditionalModal(currentclient)}>Show More Info</button>
+              </td>
+              <td>
                 <button onClick={() => showAddressModal(currentclient)}>Show Address</button>
               </td>
               <td>
@@ -69,8 +81,16 @@ function ClientsList(){
         </tbody>
       </table>
 
+      {/* The PopUp Window of Additional Information */}
+      {isAdditionalModalOpen && selectedClient && 
+        <ClientAdditionalList
+          selectedClient={selectedClient} 
+          closeModal={closeModal}
+        />
+      }
+
       {/* The PopUp Window of Address */}
-      {isModalOpen && selectedClient && 
+      {isAddressModalOpen && selectedClient && 
         <ClientAddress
           selectedClient={selectedClient} 
           closeModal={closeModal}

@@ -24,15 +24,41 @@ function EditClient() {
       town: '',
       countyCity: '',
       eircode: ''
-    }
+    },
+    dateOfBirth: '', // Date of Birth
+    parentGuardianName: '', // Parent/Guardian Name
+    permissionToLeaveMessage: 'N', // Permission to leave message
+    gender: '',
+    maritalStatus: 'Never Married',
+    referrer: '',
   });
+
+  // Function to Calculate the Age
+  const calculateAge = dateOfBirth => {
+    const birthday = new Date(dateOfBirth);
+    const today = new Date();
+    let age = today.getFullYear() - birthday.getFullYear();
+    const m = today.getMonth() - birthday.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthday.getDate())) {
+      age--;
+    }
+    return age;
+  };
+
+  // Show the input of Parent/Guardian Name, when the Date of Birth has changed.
+  const showGuardianField = client.dateOfBirth ? calculateAge(client.dateOfBirth) < 18 : false;
 
   let { id } = useParams();
 
   useEffect(( ) => {
     axios.get('http://localhost:5000/clients/'+ id)
       .then(response => {
-        setClient(response.data);
+        const clientData = response.data;
+        // 假设 clientData.dateOfBirth 是 ISO 字符串，如 "2024-01-03T00:00:00.000Z"
+        if (clientData.dateOfBirth) {
+          clientData.dateOfBirth = clientData.dateOfBirth.split('T')[0]; // 转换为 "2024-01-03"
+        }
+        setClient(clientData);
       })
       .catch(function (error) {
         console.log(error);
@@ -58,6 +84,16 @@ function EditClient() {
     }
   };
 
+  useEffect(() => {
+    // 如果不显示监护人字段，且当前监护人名称有值，则清空该值
+    if (!showGuardianField && client.parentGuardianName) {
+      setClient(prevClient => ({
+        ...prevClient,
+        parentGuardianName: '', // 将监护人名称设置为空字符串
+      }));
+    }
+  }, [showGuardianField]); // 依赖于showGuardianField，当其变化时触发
+
   function onSubmit(e) {
     e.preventDefault();
 
@@ -69,7 +105,6 @@ function EditClient() {
 
     window.location = '/client';
   }
-
 
   return (
     <div>
@@ -197,6 +232,49 @@ function EditClient() {
             value={client.homeAddress.eircode}
             onChange={onChangeClient}
           />
+        </div> 
+
+        {/* Additional personal details */}
+        <div className="form-group">
+          <label>Date of Birth:<RequiredStar>*</RequiredStar></label>
+          <input required type="date" name="dateOfBirth" className="form-control" value={client.dateOfBirth} onChange={onChangeClient} />
+        </div>
+
+        {showGuardianField && (
+          <div className="form-group">
+            <label>Parent/Guardian Name (if under 18):<RequiredStar>*</RequiredStar></label>
+            <input type="text" name="parentGuardianName" className="form-control" value={client.parentGuardianName} onChange={onChangeClient} />
+          </div>
+        )}
+
+        <div className="form-group">
+          <label>Permission to Leave Message (Y/N):<RequiredStar>*</RequiredStar></label>
+          <select name="permissionToLeaveMessage" className="form-control" value={client.permissionToLeaveMessage} onChange={onChangeClient}>
+            <option value="Y">Yes</option>
+            <option value="N">No</option>
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label>Gender:<RequiredStar>*</RequiredStar></label>
+          <input required type="text" name="gender" className="form-control" value={client.gender} onChange={onChangeClient} />
+        </div>
+
+        <div className="form-group">
+          <label>Marital Status:<RequiredStar>*</RequiredStar></label>
+          <select name="maritalStatus" className="form-control" value={client.maritalStatus} onChange={onChangeClient}>
+            <option value="Never Married">Never Married</option>
+            <option value="Domestic Partnership">Domestic Partnership</option>
+            <option value="Married">Married</option>
+            <option value="Separated">Separated</option>
+            <option value="Divorced">Divorced</option>
+            <option value="Widowed">Widowed</option>
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label>Referrer:</label>
+          <input type="text" name="referrer" className="form-control" value={client.referrer} onChange={onChangeClient} />
         </div>
 
         <div className="form-group">
