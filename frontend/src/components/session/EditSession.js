@@ -25,10 +25,39 @@ function EditSession() {
       sessionNotes: ''
       // genderPreference: ''
   });
+  
   const [allTherapists, setTherapists] = useState([]); // 新状态来存储Therapist数据
   const [allClients, setClients] = useState([]); // 新状态来存储Client数据
 
   let { id } = useParams();
+
+  useEffect(() => {
+    // 组件加载时获取Client数据
+    const fetchClients = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/clients/');
+        setClients(response.data); // 假设response.data是Client数组
+      } catch (error) {
+        console.error('Error fetching clients:', error);
+      }
+    };
+
+    fetchClients();    
+  }, [id]); // 空依赖数组意味着这个effect只会在组件加载时运行一次
+
+  useEffect(() => {
+    // 组件加载时获取Therapist数据
+    const fetchTherapists = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/therapists/');
+        setTherapists(response.data); // 假设response.data是Therapist数组
+      } catch (error) {
+        console.error('Error fetching therapists:', error);
+      }
+    };
+
+    fetchTherapists();    
+  }, [id]); // 空依赖数组意味着这个effect只会在组件加载时运行一次
 
   useEffect(( ) => {
     axios.get('http://localhost:5000/sessions/'+ id)
@@ -38,8 +67,9 @@ function EditSession() {
         if (sessionData.sessionDate) {
           sessionData.sessionDate = sessionData.sessionDate.split('T')[0]; // 转换为 "2024-01-03"
         }
-        console.log(sessionData.clients);
-        // console.log(typeof sessionData.clients[0]._id);
+        // console.log(allClients, "allClients");
+        // console.log(allTherapists, "allTherapist");
+        // console.log(sessionData.clients, "Client in SessionDATa");
         setSession(sessionData);
       })
       .catch(function (error) {
@@ -57,7 +87,11 @@ function EditSession() {
         // 添加客户ID到数组中
         setSession(prevSession => ({
           ...prevSession,
-          clients: [...prevSession.clients, allClients.find(c => c._id === value)]
+          clients: [...prevSession.clients, {
+            _id: value,
+            firstName: allClients.find(c => c._id === value).firstName,
+            lastName: allClients.find(c => c._id === value).lastName
+        }]
         }));
       } else {
         // 从数组中移除客户ID
@@ -73,35 +107,9 @@ function EditSession() {
         [name]: value
       }));    
     }
+
+    // console.log(session.clients);
   };
-
-  useEffect(() => {
-    // 组件加载时获取Client数据
-    const fetchClients = async () => {
-      try {
-        const response = await axios.get('http://localhost:5000/clients/');
-        setClients(response.data); // 假设response.data是Client数组
-      } catch (error) {
-        console.error('Error fetching clients:', error);
-      }
-    };
-
-    fetchClients();
-  }, [id]); // 空依赖数组意味着这个effect只会在组件加载时运行一次
-
-  useEffect(() => {
-    // 组件加载时获取Therapist数据
-    const fetchTherapists = async () => {
-      try {
-        const response = await axios.get('http://localhost:5000/therapists/');
-        setTherapists(response.data); // 假设response.data是Therapist数组
-      } catch (error) {
-        console.error('Error fetching therapists:', error);
-      }
-    };
-
-    fetchTherapists();
-  }, [id]); // 空依赖数组意味着这个effect只会在组件加载时运行一次
 
   function onSubmit(e) {
     e.preventDefault();
@@ -109,11 +117,11 @@ function EditSession() {
     // 准备提交的数据，确保只包含 ObjectId 字符串数组
     const submitData = {
       ...session,
-      therapist: session.therapist._id || session.therapist, // 确保总是发送 therapist 的 _id
+      therapist: session.therapist._id , // 确保总是发送 therapist 的 _id
       clients: session.clients.map(client => client._id)  // 仅发送客户的 ObjectId
   };
 
-    console.log(submitData );
+    console.log(submitData);
 
     axios.post('http://localhost:5000/sessions/update/' + id, submitData)
       .then(res => console.log(res.data))
@@ -158,10 +166,6 @@ function EditSession() {
           {/* Multi-select dropdown component here */}
           {allClients.map(client => (
             <div key={client._id}>
-               {/* <p>{client._id}</p>
-               <p>{session.clients.length}</p> 
-              <p>{String(session.clients[0]?._id)}</p> 
-              <p>{session.clients.map(item => item._id).includes(client._id) ? 'true' : 'false'}</p>     */}
               <input
                 type="checkbox"
                 name="clients"
