@@ -14,7 +14,7 @@ function CreateTherapist() {
     title: 'Mx',
     titleOther: '',
     firstName: '',
-    surname: '',
+    surName: '',
     phoneNumber: '',
     email: '',
     homeAddress: {

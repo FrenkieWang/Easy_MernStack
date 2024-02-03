@@ -15,7 +15,7 @@ function EditClient() {
     title: 'Mx',
     titleOther: '',
     firstName: '',
-    surname: '',
+    surName: '',
     phoneNumber: '',
     email: '',
     homeAddress: {
@@ -108,7 +108,7 @@ function EditClient() {
 
   return (
     <div>
-      <h3>Edit Exercise Log</h3>
+      <h3>Edit Client Log</h3>
       <form onSubmit={onSubmit}>        
         {/* Client Information */}
         <div className="form-group">
@@ -278,7 +278,7 @@ function EditClient() {
         </div>
 
         <div className="form-group">
-          <input type="submit" value="Edit Exercise Log" className="btn btn-primary" />
+          <input type="submit" value="Edit Client Log" className="btn btn-primary" />
         </div>
         <Link to="/client" >Back to Client List</Link>
       </form>

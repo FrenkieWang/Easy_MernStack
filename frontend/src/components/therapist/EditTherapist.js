@@ -15,7 +15,7 @@ function EditTherapist() {
     title: 'Mx',
     titleOther: '',
     firstName: '',
-    surname: '',
+    surName: '',
     phoneNumber: '',
     email: '',
     homeAddress: {
@@ -73,7 +73,7 @@ function EditTherapist() {
 
   return (
     <div>
-      <h3>Edit Exercise Log</h3>
+      <h3>Edit Therapist Log</h3>
       <form onSubmit={onSubmit}>        
         {/* Therapist Information */}
         <div className="form-group">
@@ -200,7 +200,7 @@ function EditTherapist() {
         </div>
 
         <div className="form-group">
-          <input type="submit" value="Edit Exercise Log" className="btn btn-primary" />
+          <input type="submit" value="Edit Therapist Log" className="btn btn-primary" />
         </div>
         <Link to="/therapist" >Back to Therapist List</Link>
       </form>

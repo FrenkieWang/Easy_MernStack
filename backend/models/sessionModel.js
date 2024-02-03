@@ -44,10 +44,10 @@ const sessionSchema = new Schema({
     sessionNotes: {
       type: String,
       required: true
-    },
-    genderPreference: { // 根据您的喜好选择实现方式
-      type: String
     }
+    // genderPreference: { // 根据您的喜好选择实现方式
+    //   type: String
+    // }
   });
 
 // 创建前的校验，确保如果 sessionType 是 'Other'，sessionTypeOther 必须被填写

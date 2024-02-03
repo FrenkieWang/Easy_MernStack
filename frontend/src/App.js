@@ -9,6 +9,10 @@ import CreateTherapist from "./components/therapist/CreateTherapist";
 import ClientsList from "./components/client/ClientsList";
 import EditClient from "./components/client/EditClient";
 import CreateClient from "./components/client/CreateClient";
+import SessionsList from "./components/session/SessionsList";
+import EditSession from "./components/session/EditSession";
+import CreateSession from "./components/session/CreateSession";
+
 
 function App() {
   return (
@@ -23,6 +27,9 @@ function App() {
         <Route path="/client" element={<ClientsList/>} />
         <Route path="/client/edit/:id" element={<EditClient/>} />
         <Route path="/client/create" element={<CreateClient/>} />
+        <Route path="/session" element={<SessionsList/>} />
+        <Route path="/session/edit/:id" element={<EditSession/>} />
+        <Route path="/session/create" element={<CreateSession/>} />
       </Routes>
        </div>
     </Router>
