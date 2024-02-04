@@ -155,10 +155,10 @@ function CreateSession() {
                 name="clients"
                 value={c._id}
                 onChange={onChangeSession}
-                checked={session.clients.includes(c._id)}
+                checked={session.clients.map(item => item._id).includes(c._id)}
                 // 如果已选中的复选框数量达到3个且当前复选框未被选中，则禁用该复选框
                 disabled={session.clients.length >= 3 
-                  && !session.clients.includes(c._id)}
+                  && !session.clients.map(item => item._id).includes(c._id)}
               />
               {c.firstName + " " + c.surName}
             </div>
