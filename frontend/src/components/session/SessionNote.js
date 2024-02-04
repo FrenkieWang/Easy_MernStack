@@ -41,7 +41,7 @@ function SessionNote(props){
         Note: 
         <textarea 
             style={{fontWeight: 'bold' }}
-            value={props.selectedSession.sessionNotes}>
+            defaultValue={props.selectedSession.sessionNotes}>
         </textarea>         
       </Modal>
     )

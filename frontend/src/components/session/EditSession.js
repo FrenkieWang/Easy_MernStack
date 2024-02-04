@@ -15,7 +15,6 @@ function EditSession() {
       sessionDate: '',
       sessionTime: '',
       clients: [],
-      // clients: '',
       therapist: '',
       fee: '',
       sessionNumber: '',
@@ -23,7 +22,6 @@ function EditSession() {
       sessionType: '',
       sessionTypeOther: '',
       sessionNotes: ''
-      // genderPreference: ''
   });
   
   const [allTherapists, setTherapists] = useState([]); // 新状态来存储Therapist数据
@@ -67,9 +65,6 @@ function EditSession() {
         if (sessionData.sessionDate) {
           sessionData.sessionDate = sessionData.sessionDate.split('T')[0]; // 转换为 "2024-01-03"
         }
-        // console.log(allClients, "allClients");
-        // console.log(allTherapists, "allTherapist");
-        // console.log(sessionData.clients, "Client in SessionDATa");
         setSession(sessionData);
       })
       .catch(function (error) {
@@ -100,6 +95,17 @@ function EditSession() {
           clients: prevSession.clients.filter(client => client._id !== value)
         }));
       }
+    // 处理Therapist 勾选...
+    } else if (name === "therapist") {
+      // 查找选中的治疗师对象
+      setSession(prevSession => ({
+        ...prevSession,
+        therapist: {
+          _id: value,
+          firstName: allTherapists.find(t => t._id === value).firstName,
+          lastName: allTherapists.find(t => t._id === value).lastName
+        }
+      }));
     // 处理其他输入字段...
     } else {  
       setSession(prevSession => ({
@@ -119,7 +125,7 @@ function EditSession() {
       ...session,
       therapist: session.therapist._id , // 确保总是发送 therapist 的 _id
       clients: session.clients.map(client => client._id)  // 仅发送客户的 ObjectId
-  };
+    };
 
     console.log(submitData);
 
@@ -160,45 +166,41 @@ function EditSession() {
           />
         </div>
 
-        {/* Assuming you have a way to select clients, perhaps a multi-select dropdown */}
+        {/* Select clients -- checkbox */}
         <div className="form-group">
           <label>Clients:<RequiredStar>*</RequiredStar> </label>
-          {/* Multi-select dropdown component here */}
-          {allClients.map(client => (
-            <div key={client._id}>
+          {allClients.map(c => (
+            <div key={c._id}>
               <input
                 type="checkbox"
                 name="clients"
-                value={client._id}
+                value={c._id}
                 onChange={onChangeSession}
-                checked={session.clients.map(item => item._id).includes(client._id)}
+                checked={session.clients.includes(c._id)}
                 // 如果已选中的复选框数量达到3个且当前复选框未被选中，则禁用该复选框
                 disabled={session.clients.length >= 3 
-                  && !session.clients.map(item => item._id).includes(client._id)}
+                  && !session.clients.includes(c._id)}
               />
-              {client.firstName + " " + client.surName}
+              {c.firstName + " " + c.surName}
             </div>
           ))}
         </div>
 
+        {/* Select Therapist -- radio box */}
         <div className="form-group">
           <label>Therapist:<RequiredStar>*</RequiredStar> </label>
-          {/* Dropdown or input field to select therapist */}
-          <select 
-            required
-            name="therapist" 
-            value={session.therapist._id} 
-            onChange={onChangeSession} 
-            className="form-control"
-          >
-            <option value="">Select Therapist</option>
-            {allTherapists.map(therapist => (
-                <option key={therapist._id} value={therapist._id}>
-                  {therapist.firstName + " " + therapist.surName} 
-                </option>
-              ))
-            }
-          </select>
+          {allTherapists.map(t => (
+            <div key={t._id}>
+              <input
+                type="radio"
+                name="therapist"
+                value={t._id}
+                onChange={onChangeSession}
+                checked={session.therapist._id === t._id}
+              />
+              {t.firstName + " " + t.surName}
+            </div>
+          ))}
         </div>
 
         <div className="form-group">
