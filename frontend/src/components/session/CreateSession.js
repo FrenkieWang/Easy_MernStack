@@ -17,8 +17,8 @@ function CreateSession() {
     therapist: '',
     fee: '',
     sessionNumber: '',
-    sessionAttendance: '',
-    sessionType: '',
+    sessionAttendance: 'Attended"',
+    sessionType: 'Intake',
     sessionTypeOther: '',
     sessionNotes: ''
   });
@@ -214,7 +214,6 @@ function CreateSession() {
             onChange={onChangeSession} 
             className="form-control"
           >
-            <option value="">Select Attendance</option>
             <option value="Attended">Attended</option>
             <option value="Cancelled">Cancelled</option>
             <option value="No Show">No Show</option>
@@ -230,7 +229,6 @@ function CreateSession() {
             onChange={onChangeSession} 
             className="form-control"
           >
-            <option value="">Select Type</option>
             <option value="Intake">Intake</option>
             <option value="Psychotherapy">Psychotherapy</option>
             <option value="Assessment">Assessment</option>
