@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
+// const generateRandomClients = require('./generateFakerData.js'); // 引入你刚才创建的文件
+
 require('dotenv').config();
 
 const app = express();
@@ -29,3 +31,6 @@ app.use('/sessions', sessionRouter);
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
 });
+
+// const randomClients = generateRandomClients(6); // 生成6个随机的Client对象
+// console.log(JSON.stringify(randomClients, null, 2)); // 美化输出随机生成的Client对象

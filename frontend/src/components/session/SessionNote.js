@@ -34,15 +34,23 @@ const CloseButton = styled.span`
   line-height: 1; 
 `;
 
+const StyledTextArea = styled.textarea`
+  width: 100%; // 宽度100%填充父容器
+  height: 100px; // 初始高度设置为100px
+  max-height: 300px; // 最大高度设置为300px
+  overflow-y: auto; // 内容超出时显示垂直滚动条
+  color: blue;
+  font-weight: bold;
+`;
+
 function SessionNote(props){
     return(
       <Modal onClose={props.closeModal}>
         <h4>{`Note of ${props.selectedSession.therapist.firstName} ${props.selectedSession.therapist.surName}`}</h4>
         Note: 
-        <textarea 
-            style={{fontWeight: 'bold' }}
+        <StyledTextArea 
             defaultValue={props.selectedSession.sessionNotes}>
-        </textarea>         
+        </StyledTextArea>         
       </Modal>
     )
 }

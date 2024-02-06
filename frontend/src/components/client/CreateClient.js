@@ -76,6 +76,18 @@ function CreateClient() {
     }
   }, [showGuardianField]); // 依赖于showGuardianField，当其变化时触发
 
+  const fetchClients = async () => {
+    const response = await fetch('http://localhost:5000/clients/generate-client'); // 确保URL与你的后端路由匹配
+    const data = await response.json();
+    console.log(data);
+    const clientData = data;
+    // 假设 clientData.dateOfBirth 是 ISO 字符串，如 "2024-01-03T00:00:00.000Z"
+    if (clientData.dateOfBirth) {
+      clientData.dateOfBirth = clientData.dateOfBirth.split('T')[0]; // 转换为 "2024-01-03"
+    }
+    setClient(clientData);
+  };
+
   function onSubmit(e) {
     e.preventDefault();
 
@@ -92,6 +104,7 @@ function CreateClient() {
     <div>
       <h3>Create New Client</h3>
       <form onSubmit={onSubmit}>
+        <button onClick={fetchClients} className="btn btn-secondary">Generate Clients</button>
         {/* Client Information */}
         <div className="form-group">
           <label>Title:<RequiredStar>*</RequiredStar> </label>

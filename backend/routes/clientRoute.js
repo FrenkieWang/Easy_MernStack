@@ -1,10 +1,18 @@
 const router = require('express').Router();
 let Client = require('../models/clientModel');
 
+const generateRandomClient = require('./faker/fakerClient'); // 确保路径正确
+
 router.route('/').get((req, res) => {
     Client.find()
     .then(clients => res.json(clients))
     .catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.route('/generate-client').get((req, res) => {
+  const client = generateRandomClient(); 
+  res.json(client);
+  console.log(client)
 });
 
 // 添加新客户

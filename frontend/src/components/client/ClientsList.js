@@ -43,6 +43,14 @@ function ClientsList(){
     setIsAddressModalOpen(false);
   }
 
+  function parseDate(dateString){
+    // 使用Date对象解析日期字符串
+    const date = new Date(dateString);
+    // 将日期转换为ISO字符串，然后分割并取第一个部分
+    const formattedDate = date.toISOString().split('T')[0];
+    return formattedDate
+}
+
   return (
     <div>
       <h3>Logged Clients</h3>
@@ -50,6 +58,7 @@ function ClientsList(){
       <table className="table">
         <thead className="thead-light">
           <tr>
+            <th>Create Time</th>
             <th>Title</th>
             <th>Name</th>
             <th>Phone Number</th>
@@ -62,6 +71,7 @@ function ClientsList(){
         <tbody>
           {clients.map(currentclient =>(
             <tr key = {currentclient._id}>
+              <td>{parseDate(currentclient.recordCreationDate)}</td>
               <td>{currentclient.title === 'Other' ? currentclient.titleOther : currentclient.title}</td>
               <td>{currentclient.firstName + " " + currentclient.surName}</td>
               <td>{currentclient.phoneNumber}</td>
@@ -84,16 +94,17 @@ function ClientsList(){
       {/* The PopUp Window of Additional Information */}
       {isAdditionalModalOpen && selectedClient && 
         <ClientAdditionalList
-          selectedClient={selectedClient} 
-          closeModal={closeModal}
+          selectedClient = {selectedClient} 
+          closeModal = {closeModal}
+          parseDate = {parseDate}
         />
       }
 
       {/* The PopUp Window of Address */}
       {isAddressModalOpen && selectedClient && 
         <ClientAddress
-          selectedClient={selectedClient} 
-          closeModal={closeModal}
+          selectedClient = {selectedClient} 
+          closeModal = {closeModal}         
         />
       }
     </div>
