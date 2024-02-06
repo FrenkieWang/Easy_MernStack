@@ -1,10 +1,18 @@
 const router = require('express').Router();
 let Therapist = require('../models/therapistModel');
 
+const generateRandomTherapist = require('./faker/fakerTherapist'); 
+
 router.route('/').get((req, res) => {
     Therapist.find()
     .then(therapists => res.json(therapists))
     .catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.route('/generate-therapist').get((req, res) => {
+  const therapist = generateRandomTherapist(); 
+  res.json(therapist);
+  console.log(therapist)
 });
 
 // 添加新客户

@@ -28,7 +28,7 @@ function EditClient() {
     dateOfBirth: '', // Date of Birth
     parentGuardianName: '', // Parent/Guardian Name
     permissionToLeaveMessage: 'N', // Permission to leave message
-    gender: '',
+    gender: 'Female',
     maritalStatus: 'Never Married',
     referrer: '',
   });
@@ -257,7 +257,11 @@ function EditClient() {
 
         <div className="form-group">
           <label>Gender:<RequiredStar>*</RequiredStar></label>
-          <input required type="text" name="gender" className="form-control" value={client.gender} onChange={onChangeClient} />
+          <select name="gender" className="form-control" value={client.gender} onChange={onChangeClient}>
+            <option value="Female">Female</option>
+            <option value="Male">Male</option>
+            <option value="Prefer not to say">Prefer not to say</option>
+          </select>
         </div>
 
         <div className="form-group">

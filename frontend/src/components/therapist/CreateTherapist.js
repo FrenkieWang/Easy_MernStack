@@ -45,6 +45,13 @@ function CreateTherapist() {
     }
   };
 
+  const generateTherapist = async () => {
+    const response = await fetch('http://localhost:5000/therapists/generate-therapist'); // 确保URL与你的后端路由匹配
+    const data = await response.json();
+    console.log(data);
+    setTherapist(data);
+  };
+
   function onSubmit(e) {
     e.preventDefault();
 
@@ -61,6 +68,7 @@ function CreateTherapist() {
     <div>
       <h3>Create New Therapist</h3>
       <form onSubmit={onSubmit}>
+        <button type="button" onClick={generateTherapist} className="btn btn-secondary">Generate a Therapist</button>
         {/* Therapist Information */}
         <div className="form-group">
           <label>Title:<RequiredStar>*</RequiredStar> </label>

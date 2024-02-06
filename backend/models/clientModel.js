@@ -59,7 +59,8 @@ const clientSchema = new Schema({
   },
   gender: { 
     type: String, 
-    required: true 
+    required: true,
+    enum: ['Male', 'Female', 'Prefer not to say']  
   },
   maritalStatus: { 
     type: String, 

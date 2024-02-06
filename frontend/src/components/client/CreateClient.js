@@ -27,7 +27,7 @@ function CreateClient() {
     dateOfBirth: '', // Date of Birth
     parentGuardianName: '', // Parent/Guardian Name
     permissionToLeaveMessage: 'N', // Permission to leave message
-    gender: '',
+    gender: 'Female',
     maritalStatus: 'Never Married',
     referrer: '',
   });
@@ -76,7 +76,7 @@ function CreateClient() {
     }
   }, [showGuardianField]); // 依赖于showGuardianField，当其变化时触发
 
-  const fetchClients = async () => {
+  const generateClient = async () => {
     const response = await fetch('http://localhost:5000/clients/generate-client'); // 确保URL与你的后端路由匹配
     const data = await response.json();
     console.log(data);
@@ -104,7 +104,7 @@ function CreateClient() {
     <div>
       <h3>Create New Client</h3>
       <form onSubmit={onSubmit}>
-        <button onClick={fetchClients} className="btn btn-secondary">Generate Clients</button>
+        <button button type="button" onClick={generateClient} className="btn btn-secondary">Generate a Client</button>
         {/* Client Information */}
         <div className="form-group">
           <label>Title:<RequiredStar>*</RequiredStar> </label>
@@ -252,7 +252,11 @@ function CreateClient() {
 
         <div className="form-group">
           <label>Gender:<RequiredStar>*</RequiredStar></label>
-          <input required type="text" name="gender" className="form-control" value={client.gender} onChange={onChangeClient} />
+          <select name="gender" className="form-control" value={client.gender} onChange={onChangeClient}>
+            <option value="Female">Female</option>
+            <option value="Male">Male</option>
+            <option value="Prefer not to say">Prefer not to say</option>
+          </select>
         </div>
 
         <div className="form-group">

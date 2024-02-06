@@ -4,7 +4,7 @@ function generateRandomClient() {
   const titles = ['Mx', 'Ms', 'Mr', 'Mrs', 'Miss', 'Dr', 'Other'];
   const title = titles[Math.floor(Math.random() * titles.length)];
 
-  const genders = ['Male', 'Female', 'Other'];
+  const genders = ['Male', 'Female', 'Prefer not to say'];
   const gender = genders[Math.floor(Math.random() * genders.length)];
 
   const maritalStatuses = ['Never Married', 'Domestic Partnership', 'Married', 'Separated', 'Divorced', 'Widowed'];

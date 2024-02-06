@@ -1,7 +1,7 @@
 const router = require('express').Router();
 let Client = require('../models/clientModel');
 
-const generateRandomClient = require('./faker/fakerClient'); // 确保路径正确
+const generateRandomClient = require('./faker/fakerClient'); 
 
 router.route('/').get((req, res) => {
     Client.find()
