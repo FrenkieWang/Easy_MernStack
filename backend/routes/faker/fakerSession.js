@@ -16,7 +16,7 @@ function generateRandomSession() {
     sessionTime: randomSessionTime,
     clients: [], 
     therapist: '', 
-    fee: faker.commerce.price(0, 10000), 
+    fee: faker.finance.amount(0, 10000, 2), 
     sessionNumber: faker.datatype.number({ min: 1, max: 100 }),
     sessionAttendance: sessionAttendanceOption,
     sessionType: sessionTypeOption,

@@ -46,19 +46,6 @@ function CreateSession() {
       try {
         const response = await axios.get('http://localhost:5000/therapists/');
         setTherapists(response.data); 
-
-        // 检查响应中是否有治疗师数据
-        if (response.data && response.data.length > 0) {
-          const firstTherapist = response.data[0];
-          setSession(prevSession => ({
-            ...prevSession,
-            therapist: {
-              _id: firstTherapist._id,
-              firstName: firstTherapist.firstName,
-              lastName: firstTherapist.lastName
-            }
-          }));
-        }
       } catch (error) {
         console.error('Error fetching therapists:', error);
       }
@@ -119,16 +106,59 @@ function CreateSession() {
   const generateSession = async () => {
     const response = await fetch('http://localhost:5000/sessions/generate-session'); 
     const data = await response.json();
-    console.log(data);
-    const sessionData = data;
+    // console.log(data);
+    let sessionData = data;
+
     // 假设 sessionData.sessionDate 是 ISO 字符串，如 "2024-01-03T00:00:00.000Z"
     if (sessionData.sessionDate) {
       sessionData.sessionDate = sessionData.sessionDate.split('T')[0]; // 转换为 "2024-01-03"
     }
+
     // 转换 sessionTime 格式
     if (sessionData.sessionTime) {
       sessionData.sessionTime = formatSessionTime(sessionData.sessionTime); // 转换为 "HH:mm"
     }
+
+    // Random select 1 Therapist
+    if (allTherapists && allTherapists.length > 0) {
+      const randomIndex = Math.floor(Math.random() * allTherapists.length); 
+      const selectedTherapist = allTherapists[randomIndex]; 
+
+      sessionData = {
+        ...sessionData,
+        therapist: {
+          _id: selectedTherapist._id,
+          firstName: selectedTherapist.firstName,
+          lastName: selectedTherapist.lastName
+        }
+      };
+    }
+
+    // 从 allClients 中随机抽取 1-3 个 client
+    if (allClients && allClients.length > 0) {
+      const numberOfClients = Math.floor(Math.random() * 3) + 1; // 生成 1 到 3 之间的随机数
+
+      let selectedClients = [];
+      let indexes = new Set(); // 用于存储已选择的客户索引，确保不重复
+
+      while (selectedClients.length < numberOfClients) {
+        let randomIndex = Math.floor(Math.random() * allClients.length);
+        if (!indexes.has(randomIndex)) {
+          indexes.add(randomIndex);
+          selectedClients.push(allClients[randomIndex]);
+        }
+      }
+
+      sessionData = {
+        ...sessionData,
+        clients: selectedClients.map(client => ({
+          _id: client._id, // 存储选中客户的 _id
+          firstName: client.firstName, // 存储选中客户的 firstName
+          lastName: client.lastName // 存储选中客户的 lastName
+        }))
+      };
+    }
+
     setSession(sessionData);
   };
 
