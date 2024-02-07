@@ -48,7 +48,7 @@ function EditSession() {
     const fetchTherapists = async () => {
       try {
         const response = await axios.get('http://localhost:5000/therapists/');
-        setTherapists(response.data); // 假设response.data是Therapist数组
+        setTherapists(response.data); // 假设response.data是Therapist数组        
       } catch (error) {
         console.error('Error fetching therapists:', error);
       }
@@ -119,6 +119,12 @@ function EditSession() {
 
   function onSubmit(e) {
     e.preventDefault();
+
+    // 确保至少选择了一个客户
+    if (session.clients.length < 1) {
+      alert('Please select at least one client.');
+      return; // 不提交表单并退出函数
+    }
 
     // 准备提交的数据，确保只包含 ObjectId 字符串数组
     const submitData = {

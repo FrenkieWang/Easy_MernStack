@@ -104,7 +104,7 @@ function CreateClient() {
     <div>
       <h3>Create New Client</h3>
       <form onSubmit={onSubmit}>
-        <button button type="button" onClick={generateClient} className="btn btn-secondary">
+        <button type="button" onClick={generateClient} className="btn btn-secondary">
           Generate a Client
         </button>
         

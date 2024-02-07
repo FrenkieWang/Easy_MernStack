@@ -8,7 +8,7 @@ const sessionSchema = new Schema({
       required: true
     },
     sessionTime: {
-      type: String, // 或者根据需要使用 Date 类型
+      type: String, 
       required: true
     },
     clients: [{ 
@@ -22,7 +22,7 @@ const sessionSchema = new Schema({
       required: true 
     },
     fee: {
-      type: Number, // 假设费用是数字类型
+      type: Number, 
     },
     sessionNumber: {
       type: Number,
@@ -47,11 +47,23 @@ const sessionSchema = new Schema({
     }
   });
 
-// 创建前的校验，确保如果 sessionType 是 'Other'，sessionTypeOther 必须被填写
+
 sessionSchema.pre('validate', function(next) {
+    // 确保如果 sessionType 是 'Other'，sessionTypeOther 必须被填写
     if (this.sessionType === 'Other' && !this.sessionTypeOther) {
       this.invalidate('sessionTypeOther', 'Session type must be specified if "Other" is selected');
     }
+
+    // 验证 clients 数组长度在 1 到 3 之间
+    if (this.clients.length < 1 || this.clients.length > 3) {
+      this.invalidate('clients', 'Clients array must contain 1 to 3 clients');
+    }
+
+    // 确保 therapist 字段不为空
+    if (!this.therapist) {
+      this.invalidate('therapist', 'Therapist field is required');
+    }
+    
     next();
 });
 

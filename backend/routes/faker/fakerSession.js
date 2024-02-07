@@ -10,16 +10,13 @@ function generateRandomSession() {
   const randomSessionTime = 
   `${faker.datatype.number({ min: 0, max: 23 })}:` + 
   `${faker.datatype.number({ min: 0, max: 59 }).toString().padStart(2, '0')}`;
-  //  + `${["AM", "PM"][Math.floor(Math.random() * 2)]}`;
 
   const session = {
     sessionDate: faker.date.future(),
     sessionTime: randomSessionTime,
-    // clients: [new mongoose.Types.ObjectId()], // 生成一个示例ObjectId，实际应用中需要替换
-    // therapist: new mongoose.Types.ObjectId(), // 同上
     clients: [], 
     therapist: '', 
-    fee: faker.commerce.price(50, 200), // 假设费用在50到200之间
+    fee: faker.commerce.price(0, 10000), 
     sessionNumber: faker.datatype.number({ min: 1, max: 100 }),
     sessionAttendance: sessionAttendanceOption,
     sessionType: sessionTypeOption,

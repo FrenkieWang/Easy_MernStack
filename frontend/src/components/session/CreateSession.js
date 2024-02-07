@@ -45,7 +45,20 @@ function CreateSession() {
     const fetchTherapists = async () => {
       try {
         const response = await axios.get('http://localhost:5000/therapists/');
-        setTherapists(response.data); // 假设response.data是Therapist数组
+        setTherapists(response.data); 
+
+        // 检查响应中是否有治疗师数据
+        if (response.data && response.data.length > 0) {
+          const firstTherapist = response.data[0];
+          setSession(prevSession => ({
+            ...prevSession,
+            therapist: {
+              _id: firstTherapist._id,
+              firstName: firstTherapist.firstName,
+              lastName: firstTherapist.lastName
+            }
+          }));
+        }
       } catch (error) {
         console.error('Error fetching therapists:', error);
       }
@@ -122,6 +135,18 @@ function CreateSession() {
   function onSubmit(e) {
     e.preventDefault();
 
+    // 确保至少选择了一个Client
+    if (session.clients.length < 1) {
+      alert('Please select at least one client.');
+      return; // 不提交表单并退出函数
+    }
+
+    // 确保选择了一个Therapist
+    if (!session.therapist || !session.therapist._id) {
+      alert('Please select a therapist.');
+      return; // 不提交表单并退出函数
+    }
+
     // 准备提交的数据，确保只包含 ObjectId 字符串数组
     const submitData = {
       ...session,
@@ -142,7 +167,7 @@ function CreateSession() {
     <div>
       <h3>Create New Session</h3>
       <form onSubmit={onSubmit}>
-        <button button type="button" onClick={generateSession} className="btn btn-secondary">
+        <button type="button" onClick={generateSession} className="btn btn-secondary">
           Generate a Session
         </button>
         
