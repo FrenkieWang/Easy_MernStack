@@ -68,7 +68,10 @@ function CreateTherapist() {
     <div>
       <h3>Create New Therapist</h3>
       <form onSubmit={onSubmit}>
-        <button type="button" onClick={generateTherapist} className="btn btn-secondary">Generate a Therapist</button>
+        <button type="button" onClick={generateTherapist} className="btn btn-secondary">
+          Generate a Therapist
+        </button>
+        
         {/* Therapist Information */}
         <div className="form-group">
           <label>Title:<RequiredStar>*</RequiredStar> </label>
@@ -194,7 +197,7 @@ function CreateTherapist() {
         </div>
         
         <div className="form-group">
-          <input type="submit" value="Create Therapist" className="btn btn-primary" />
+          <input type="submit" value="Submit Therapist Information" className="btn btn-primary" />
         </div>
         <Link to="/therapist" >Back to Therapist List</Link>
       </form>

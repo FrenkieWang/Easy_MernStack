@@ -2,12 +2,20 @@ const router = require('express').Router();
 let Session = require('../models/sessionModel');
 const mongoose = require('mongoose');
 
+const generateRandomSession = require('./faker/fakerSession'); 
+
 router.route('/').get((req, res) => {
     Session.find()
     .populate('therapist', 'firstName surName')  // 假设 Therapist 模型有 firstName 和 lastName 字段 _id 默认包含
     .populate('clients', 'firstName surName')  // 假设 Client 模型有 firstName 和 lastName 字段 _id 默认包含
     .then(sessions => res.json(sessions))
     .catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.route('/generate-session').get((req, res) => {
+  const session = generateRandomSession(); 
+  res.json(session);
+  console.log(session)
 });
 
 // 添加新客户

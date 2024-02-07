@@ -104,7 +104,10 @@ function CreateClient() {
     <div>
       <h3>Create New Client</h3>
       <form onSubmit={onSubmit}>
-        <button button type="button" onClick={generateClient} className="btn btn-secondary">Generate a Client</button>
+        <button button type="button" onClick={generateClient} className="btn btn-secondary">
+          Generate a Client
+        </button>
+        
         {/* Client Information */}
         <div className="form-group">
           <label>Title:<RequiredStar>*</RequiredStar> </label>
@@ -277,7 +280,7 @@ function CreateClient() {
         </div>
         
         <div className="form-group">
-          <input type="submit" value="Create Client" className="btn btn-primary" />
+          <input type="submit" value="Submit Client Information" className="btn btn-primary" />
         </div>
         <Link to="/client" >Back to Client List</Link>
       </form>

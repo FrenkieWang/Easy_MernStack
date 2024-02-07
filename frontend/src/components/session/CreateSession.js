@@ -96,6 +96,29 @@ function CreateSession() {
     }
   };
 
+  function formatSessionTime(timeStr) {
+    let [hours, minutes] = timeStr.split(':');
+    hours = hours.length === 1 ? `0${hours}` : hours; // 如果小时是1位数，前面加0
+  
+    return `${hours}:${minutes}`;
+  }
+
+  const generateSession = async () => {
+    const response = await fetch('http://localhost:5000/sessions/generate-session'); 
+    const data = await response.json();
+    console.log(data);
+    const sessionData = data;
+    // 假设 sessionData.sessionDate 是 ISO 字符串，如 "2024-01-03T00:00:00.000Z"
+    if (sessionData.sessionDate) {
+      sessionData.sessionDate = sessionData.sessionDate.split('T')[0]; // 转换为 "2024-01-03"
+    }
+    // 转换 sessionTime 格式
+    if (sessionData.sessionTime) {
+      sessionData.sessionTime = formatSessionTime(sessionData.sessionTime); // 转换为 "HH:mm"
+    }
+    setSession(sessionData);
+  };
+
   function onSubmit(e) {
     e.preventDefault();
 
@@ -119,6 +142,9 @@ function CreateSession() {
     <div>
       <h3>Create New Session</h3>
       <form onSubmit={onSubmit}>
+        <button button type="button" onClick={generateSession} className="btn btn-secondary">
+          Generate a Session
+        </button>
         
         {/* Session Information */}        
         <div className="form-group">
