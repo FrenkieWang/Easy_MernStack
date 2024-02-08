@@ -1,13 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
 import {useState, useEffect} from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+
 import ClientAddress from './ClientAddress';
 import ClientAdditionalList from './ClientAdditionalList';
 
 function ClientsList(){
   const [clients, setClients] = useState([]);
   const [selectedClient, setSelectedClient] = useState(null);
+
   const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
   const [isAdditionalModalOpen, setIsAdditionalModalOpen] = useState(false);
 
@@ -44,12 +46,12 @@ function ClientsList(){
   }
 
   function parseDate(dateString){
-    // 使用Date对象解析日期字符串
+    // Parse String to Date
     const date = new Date(dateString);
-    // 将日期转换为ISO字符串，然后分割并取第一个部分
+    // Get the String part before T
     const formattedDate = date.toISOString().split('T')[0];
     return formattedDate
-}
+  }
 
   return (
     <div>

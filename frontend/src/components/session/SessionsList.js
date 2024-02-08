@@ -1,7 +1,8 @@
 import React from 'react';
+import {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import {useState, useEffect} from 'react';
+
 import SessionNote from './SessionNote';
 
 function SessionsList(){
@@ -36,12 +37,12 @@ function SessionsList(){
   }
 
   function parseDate(dateString){
-    // 使用Date对象解析日期字符串
+    // Parse String to Date
     const date = new Date(dateString);
-    // 将日期转换为ISO字符串，然后分割并取第一个部分
+    // Get the String part before T
     const formattedDate = date.toISOString().split('T')[0];
     return formattedDate
-}
+  }
 
   return (
     <div>

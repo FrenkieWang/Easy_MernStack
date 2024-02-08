@@ -15,7 +15,6 @@ router.route('/generate-client').get((req, res) => {
   console.log(client)
 });
 
-// 添加新客户
 router.route('/add').post((req, res) => {
     const newClient = new Client({
       title: req.body.title,
@@ -31,7 +30,7 @@ router.route('/add').post((req, res) => {
       gender: req.body.gender,
       maritalStatus: req.body.maritalStatus,
       referrer: req.body.referrer
-      // recordCreationDate 会自动设置
+      // recordCreationDate will auto generate
     });
   
     newClient.save()
@@ -54,7 +53,7 @@ router.route('/:id').delete((req, res) => {
 router.route('/update/:id').post((req, res) => {
   Client.findById(req.params.id)
     .then(client => {
-      // 更新所有字段
+      // Update Client Information
       client.title = req.body.title;
       client.titleOther = req.body.title === 'Other' ? req.body.titleOther : '';
       client.firstName = req.body.firstName;
@@ -62,14 +61,14 @@ router.route('/update/:id').post((req, res) => {
       client.phoneNumber = req.body.phoneNumber;
       client.email = req.body.email;
 
-      // 更新地址信息
+      // Update Client Address
       client.homeAddress.addressLine1 = req.body.homeAddress.addressLine1;
       client.homeAddress.addressLine2 = req.body.homeAddress.addressLine2;
       client.homeAddress.town = req.body.homeAddress.town;
       client.homeAddress.countyCity = req.body.homeAddress.countyCity;
       client.homeAddress.eircode = req.body.homeAddress.eircode;
 
-      // 更新额外个人信息
+      // Update Additional Information
       client.dateOfBirth = Date.parse(req.body.dateOfBirth);
       client.parentGuardianName = new Date(req.body.dateOfBirth).getFullYear() > new Date().getFullYear() - 18 ? req.body.parentGuardianName : '';
       client.permissionToLeaveMessage = req.body.permissionToLeaveMessage;

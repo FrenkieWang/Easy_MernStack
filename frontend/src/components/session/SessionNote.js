@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-// Styled components
 const StyledModal = styled.div`
   position: fixed;
   top: 0;
@@ -35,10 +34,10 @@ const CloseButton = styled.span`
 `;
 
 const StyledTextArea = styled.textarea`
-  width: 100%; // 宽度100%填充父容器
-  height: 100px; // 初始高度设置为100px
-  max-height: 300px; // 最大高度设置为300px
-  overflow-y: auto; // 内容超出时显示垂直滚动条
+  width: 100%; 
+  height: 100px; 
+  max-height: 300px; 
+  overflow-y: auto; // Vertical scroll bar when content is exceeded
   color: blue;
   font-weight: bold;
 `;

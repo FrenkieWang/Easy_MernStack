@@ -24,9 +24,9 @@ function CreateClient() {
       countyCity: '',
       eircode: ''
     },
-    dateOfBirth: '', // Date of Birth
-    parentGuardianName: '', // Parent/Guardian Name
-    permissionToLeaveMessage: 'N', // Permission to leave message
+    dateOfBirth: '', 
+    parentGuardianName: '', 
+    permissionToLeaveMessage: 'N', 
     gender: 'Female',
     maritalStatus: 'Never Married',
     referrer: '',
@@ -43,7 +43,6 @@ function CreateClient() {
     }
     return age;
   };
-
   // Show the input of Parent/Guardian Name, when the Date of Birth has changed.
   const showGuardianField = client.dateOfBirth ? calculateAge(client.dateOfBirth) < 18 : false;
 
@@ -66,24 +65,26 @@ function CreateClient() {
     }
   };
 
+  /* If the guardian field is not displayed,
+     clear the value of parentGuardianName */
   useEffect(() => {
-    // 如果不显示监护人字段，且当前监护人名称有值，则清空该值
     if (!showGuardianField && client.parentGuardianName) {
       setClient(prevClient => ({
         ...prevClient,
-        parentGuardianName: '', // 将监护人名称设置为空字符串
+        parentGuardianName: '', 
       }));
     }
-  }, [showGuardianField]); // 依赖于showGuardianField，当其变化时触发
+  }, [showGuardianField]); 
 
   const generateClient = async () => {
-    const response = await fetch('http://localhost:5000/clients/generate-client'); // 确保URL与你的后端路由匹配
+    const response = await fetch('http://localhost:5000/clients/generate-client'); 
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
+
+    // Get the Date without Time
     const clientData = data;
-    // 假设 clientData.dateOfBirth 是 ISO 字符串，如 "2024-01-03T00:00:00.000Z"
     if (clientData.dateOfBirth) {
-      clientData.dateOfBirth = clientData.dateOfBirth.split('T')[0]; // 转换为 "2024-01-03"
+      clientData.dateOfBirth = clientData.dateOfBirth.split('T')[0]; 
     }
     setClient(clientData);
   };

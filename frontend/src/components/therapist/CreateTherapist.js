@@ -46,7 +46,7 @@ function CreateTherapist() {
   };
 
   const generateTherapist = async () => {
-    const response = await fetch('http://localhost:5000/therapists/generate-therapist'); // 确保URL与你的后端路由匹配
+    const response = await fetch('http://localhost:5000/therapists/generate-therapist'); 
     const data = await response.json();
     console.log(data);
     setTherapist(data);

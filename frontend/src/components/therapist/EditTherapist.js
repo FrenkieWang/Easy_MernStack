@@ -1,8 +1,8 @@
 import React from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
 import {useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 // Create a styled span for the red asterisk
@@ -74,7 +74,8 @@ function EditTherapist() {
   return (
     <div>
       <h3>Edit Therapist Log</h3>
-      <form onSubmit={onSubmit}>        
+      <form onSubmit={onSubmit}>       
+       
         {/* Therapist Information */}
         <div className="form-group">
           <label>Title:<RequiredStar>*</RequiredStar> </label>

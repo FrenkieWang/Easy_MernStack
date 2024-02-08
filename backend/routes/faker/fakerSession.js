@@ -1,11 +1,11 @@
 const { faker } = require('@faker-js/faker');
 
 function generateRandomSession() {
-  const sessionAttendanceOptions = ['Attended', 'Cancelled', 'No Show'];
-  const sessionAttendanceOption = sessionAttendanceOptions[Math.floor(Math.random() * sessionAttendanceOptions.length)];
+  const sessionAttendances = ['Attended', 'Cancelled', 'No Show'];
+  const sessionAttendance = sessionAttendances[Math.floor(Math.random() * sessionAttendances.length)];
 
-  const sessionTypeOptions = ['Intake', 'Psychotherapy', 'Assessment', 'Other'];
-  const sessionTypeOption = sessionTypeOptions[Math.floor(Math.random() * sessionTypeOptions.length)];
+  const sessionTypes = ['Intake', 'Psychotherapy', 'Assessment', 'Other'];
+  const sessionType = sessionTypes[Math.floor(Math.random() * sessionTypes.length)];
 
   const randomSessionTime = 
   `${faker.datatype.number({ min: 0, max: 23 })}:` + 
@@ -18,16 +18,11 @@ function generateRandomSession() {
     therapist: '', 
     fee: faker.finance.amount(0, 10000, 2), 
     sessionNumber: faker.datatype.number({ min: 1, max: 100 }),
-    sessionAttendance: sessionAttendanceOption,
-    sessionType: sessionTypeOption,
-    sessionTypeOther: undefined, // 仅当sessionType为'Other'时设置
+    sessionAttendance: sessionAttendance,
+    sessionType: sessionType,
+    sessionTypeOther: sessionType === 'Other' ? faker.lorem.word() : undefined,
     sessionNotes: faker.lorem.paragraph()
   };
-
-  // 如果会话类型为'Other'，则添加额外的会话类型说明
-  if (session.sessionType === 'Other') {
-    session.sessionTypeOther = faker.lorem.words(3);
-  }
 
   return session;
 }

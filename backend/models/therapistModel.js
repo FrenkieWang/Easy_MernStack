@@ -48,7 +48,7 @@ const therapistSchema = new Schema({
   }
 });
 
-// 创建前的校验，确保如果 title 是 'Other'，titleOther 必须被填写
+
 therapistSchema.pre('validate', function(next) {
   if (this.title === 'Other' && !this.titleOther) {
     this.invalidate('titleOther', 'Title must be specified if "Other" is selected');

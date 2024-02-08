@@ -23,47 +23,47 @@ function EditSession() {
       sessionTypeOther: '',
       sessionNotes: ''
   });
-  
-  const [allTherapists, setTherapists] = useState([]); // 新状态来存储Therapist数据
-  const [allClients, setClients] = useState([]); // 新状态来存储Client数据
 
   let { id } = useParams();
+  
+  // Get the information of all therapists and clients
+  const [allTherapists, setTherapists] = useState([]); 
+  const [allClients, setClients] = useState([]); 
 
   useEffect(() => {
-    // 组件加载时获取Client数据
     const fetchClients = async () => {
       try {
         const response = await axios.get('http://localhost:5000/clients/');
-        setClients(response.data); // 假设response.data是Client数组
+        setClients(response.data); 
       } catch (error) {
         console.error('Error fetching clients:', error);
       }
     };
 
     fetchClients();    
-  }, [id]); // 空依赖数组意味着这个effect只会在组件加载时运行一次
+  }, [id]); 
 
   useEffect(() => {
-    // 组件加载时获取Therapist数据
     const fetchTherapists = async () => {
       try {
         const response = await axios.get('http://localhost:5000/therapists/');
-        setTherapists(response.data); // 假设response.data是Therapist数组        
+        setTherapists(response.data);        
       } catch (error) {
         console.error('Error fetching therapists:', error);
       }
     };
 
     fetchTherapists();    
-  }, [id]); // 空依赖数组意味着这个effect只会在组件加载时运行一次
+  }, [id]); 
 
+  // Get the information of the session according to session_id
   useEffect(( ) => {
     axios.get('http://localhost:5000/sessions/'+ id)
       .then(response => {
         const sessionData = response.data;
-        // 假设 sessionData.sessionDate 是 ISO 字符串，如 "2024-01-03T00:00:00.000Z"
+        // Format Date to "YYYY-MM-DD"
         if (sessionData.sessionDate) {
-          sessionData.sessionDate = sessionData.sessionDate.split('T')[0]; // 转换为 "2024-01-03"
+          sessionData.sessionDate = sessionData.sessionDate.split('T')[0];
         }
         setSession(sessionData);
       })
@@ -77,9 +77,10 @@ function EditSession() {
   function onChangeSession(e){
     const { name, value, checked } = e.target;
 
+    // Handle changes for checkbox - clients
     if (name === "clients") {
+      // Put client_id into Array.
       if (checked) {
-        // 添加客户ID到数组中
         setSession(prevSession => ({
           ...prevSession,
           clients: [...prevSession.clients, {
@@ -88,16 +89,16 @@ function EditSession() {
             lastName: allClients.find(c => c._id === value).lastName
         }]
         }));
+      // Remove client_id from Array.
       } else {
-        // 从数组中移除客户ID
         setSession(prevSession => ({
           ...prevSession,
           clients: prevSession.clients.filter(client => client._id !== value)
         }));
       }
-    // 处理Therapist 勾选...
+    // Handle changes for radiobox - therapist
     } else if (name === "therapist") {
-      // 查找选中的治疗师对象
+      // Change selected therapist
       setSession(prevSession => ({
         ...prevSession,
         therapist: {
@@ -106,7 +107,7 @@ function EditSession() {
           lastName: allTherapists.find(t => t._id === value).lastName
         }
       }));
-    // 处理其他输入字段...
+    // Handling other input fields...
     } else {  
       setSession(prevSession => ({
         ...prevSession,
@@ -114,23 +115,22 @@ function EditSession() {
       }));    
     }
 
-    // console.log(session.clients);
   };
 
   function onSubmit(e) {
     e.preventDefault();
 
-    // 确保至少选择了一个客户
+    // Make sure select at least one client
     if (session.clients.length < 1) {
       alert('Please select at least one client.');
-      return; // 不提交表单并退出函数
+      return; // Do not submit the form and exit the function
     }
 
-    // 准备提交的数据，确保只包含 ObjectId 字符串数组
+    // Only submit _id of clients and therapist
     const submitData = {
       ...session,
-      therapist: session.therapist._id , // 确保总是发送 therapist 的 _id
-      clients: session.clients.map(client => client._id)  // 仅发送客户的 ObjectId
+      therapist: session.therapist._id , 
+      clients: session.clients.map(client => client._id)  
     };
 
     console.log(submitData);
@@ -146,7 +146,8 @@ function EditSession() {
   return (
     <div>
       <h3>Edit Session Log</h3>
-      <form onSubmit={onSubmit}>        
+      <form onSubmit={onSubmit}>  
+
         {/* Session Information */}        
         <div className="form-group">
           <label>Session Date:<RequiredStar>*</RequiredStar> </label>
@@ -183,7 +184,8 @@ function EditSession() {
                 value={c._id}
                 onChange={onChangeSession}
                 checked={session.clients.map(item => item._id).includes(c._id)}
-                // 如果已选中的复选框数量达到3个且当前复选框未被选中，则禁用该复选框
+                /* Disable the checkbox if the number reaches 3 
+                   and the current checkbox is unchecked */
                 disabled={session.clients.length >= 3 
                   && !session.clients.map(item => item._id).includes(c._id)}
               />

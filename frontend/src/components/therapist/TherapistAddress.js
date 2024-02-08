@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-// Styled components
 const StyledModal = styled.div`
   position: fixed;
   top: 0;
