@@ -29,3 +29,8 @@ app.use('/sessions', sessionRouter);
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
 });
+
+// Test the Vercel
+app.get("/", (req, res) => {
+	res.send("You succeeded to deploy backend to Vercel!");
+});
