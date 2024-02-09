@@ -108,41 +108,21 @@ function CreateSession() {
   const generateSession = async () => {
     const response = await fetch('http://localhost:5000/sessions/generate-session'); 
     const data = await response.json();
-    // console.log(data);
 
     let sessionData = data;
 
-    // Convert format of Date  "YYYY-MM-DD"
-    if (sessionData.sessionDate) {
-      sessionData.sessionDate = sessionData.sessionDate.split('T')[0]; 
-    }
-
-    // Convert format of Time "HH:mm"
-    if (sessionData.sessionTime) {
-      sessionData.sessionTime = formatSessionTime(sessionData.sessionTime); 
-    }
-
     // Random select 1 Therapist
+    let selectedTherapist;
     if (allTherapists && allTherapists.length > 0) {
       const randomIndex = Math.floor(Math.random() * allTherapists.length); 
-      const selectedTherapist = allTherapists[randomIndex]; 
-
-      sessionData = {
-        ...sessionData,
-        therapist: {
-          _id: selectedTherapist._id,
-          firstName: selectedTherapist.firstName,
-          lastName: selectedTherapist.lastName
-        }
-      };
+      selectedTherapist = allTherapists[randomIndex]; 
     }
 
     // Random select 1-3 Clients
+    let selectedClients = [];
     if (allClients && allClients.length > 0) {
       const numberOfClients = Math.floor(Math.random() * 3) + 1; 
-      let selectedClients = [];
-      // Avoid duplicate 
-      let indexes = new Set(); 
+      let indexes = new Set();  // Avoid duplicate 
 
       while (selectedClients.length < numberOfClients) {
         let randomIndex = Math.floor(Math.random() * allClients.length);
@@ -151,16 +131,24 @@ function CreateSession() {
           selectedClients.push(allClients[randomIndex]);
         }
       }
-
-      sessionData = {
-        ...sessionData,
-        clients: selectedClients.map(client => ({
-          _id: client._id, 
-          firstName: client.firstName,
-          lastName: client.lastName 
-        }))
-      };
     }
+
+    sessionData = {
+      ...sessionData,
+      sessionDate: sessionData.sessionDate.split('T')[0], // "YYYY-MM-DD"
+      sessionTime: formatSessionTime(sessionData.sessionTime), // "HH:mm"
+      clients: selectedClients.map(client => ({
+        _id: client._id, 
+        firstName: client.firstName,
+        lastName: client.lastName 
+      })),
+      therapist: {
+        _id: selectedTherapist._id,
+        firstName: selectedTherapist.firstName,
+        lastName: selectedTherapist.lastName
+      },
+      sessionNumber: sessionData.sessionNumber.toString().padStart(4, '0') // 4 digits
+    };
 
     setSession(sessionData);
   };
