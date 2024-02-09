@@ -11,7 +11,7 @@ function SessionsList(){
   const [isModalOpen, setIsModalOpen] = useState(false);
   
   useEffect(( ) => {
-    axios.get('http://localhost:5000/sessions/')
+    axios.get('https://mern-stack-crud-3-tables.vercel.app//sessions/')
     .then(response => {
       setSessions(response.data);
     })
@@ -21,7 +21,7 @@ function SessionsList(){
   }, []);
 
   function deleteSession(id) {
-    axios.delete('http://localhost:5000/sessions/'+id)
+    axios.delete('https://mern-stack-crud-3-tables.vercel.app//sessions/'+id)
       .then(response => { console.log(response.data)});
 
     setSessions(sessions.filter(el => el._id !== id));

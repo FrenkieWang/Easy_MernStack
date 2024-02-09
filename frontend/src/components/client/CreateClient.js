@@ -77,7 +77,7 @@ function CreateClient() {
   }, [showGuardianField]); 
 
   const generateClient = async () => {
-    const response = await fetch('http://localhost:5000/clients/generate-client'); 
+    const response = await fetch('https://mern-stack-crud-3-tables.vercel.app//clients/generate-client'); 
     const data = await response.json();
     // console.log(data);
 
@@ -94,7 +94,7 @@ function CreateClient() {
 
     console.log(client);
 
-    axios.post('http://localhost:5000/clients/add', client)
+    axios.post('https://mern-stack-crud-3-tables.vercel.app//clients/add', client)
       .then(res => console.log(res.data))
       .catch(error => console.log(error));
 

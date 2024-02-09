@@ -14,7 +14,7 @@ function ClientsList(){
   const [isAdditionalModalOpen, setIsAdditionalModalOpen] = useState(false);
 
   useEffect(( ) => {
-    axios.get('http://localhost:5000/clients/')
+    axios.get('https://mern-stack-crud-3-tables.vercel.app//clients/')
     .then(response => {
       setClients(response.data);
     })
@@ -24,7 +24,7 @@ function ClientsList(){
   }, []);
 
   function deleteClient(id) {
-    axios.delete('http://localhost:5000/clients/'+id)
+    axios.delete('https://mern-stack-crud-3-tables.vercel.app//clients/'+id)
       .then(response => { console.log(response.data)});
 
     setClients(clients.filter(el => el._id !== id));

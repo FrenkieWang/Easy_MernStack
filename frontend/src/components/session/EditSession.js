@@ -33,7 +33,7 @@ function EditSession() {
   useEffect(() => {
     const fetchClients = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/clients/');
+        const response = await axios.get('https://mern-stack-crud-3-tables.vercel.app//clients/');
         setClients(response.data); 
       } catch (error) {
         console.error('Error fetching clients:', error);
@@ -46,7 +46,7 @@ function EditSession() {
   useEffect(() => {
     const fetchTherapists = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/therapists/');
+        const response = await axios.get('https://mern-stack-crud-3-tables.vercel.app//therapists/');
         setTherapists(response.data);        
       } catch (error) {
         console.error('Error fetching therapists:', error);
@@ -58,7 +58,7 @@ function EditSession() {
 
   // Get the information of the session according to session_id
   useEffect(( ) => {
-    axios.get('http://localhost:5000/sessions/'+ id)
+    axios.get('https://mern-stack-crud-3-tables.vercel.app//sessions/'+ id)
       .then(response => {
         const sessionData = response.data;
         // Format Date to "YYYY-MM-DD"
@@ -135,7 +135,7 @@ function EditSession() {
 
     console.log(submitData);
 
-    axios.post('http://localhost:5000/sessions/update/' + id, submitData)
+    axios.post('https://mern-stack-crud-3-tables.vercel.app//sessions/update/' + id, submitData)
       .then(res => console.log(res.data))
       .catch(error => console.log(error));
 

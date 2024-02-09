@@ -46,7 +46,7 @@ function CreateTherapist() {
   };
 
   const generateTherapist = async () => {
-    const response = await fetch('http://localhost:5000/therapists/generate-therapist'); 
+    const response = await fetch('https://mern-stack-crud-3-tables.vercel.app//therapists/generate-therapist'); 
     const data = await response.json();
     console.log(data);
     setTherapist(data);
@@ -57,7 +57,7 @@ function CreateTherapist() {
 
     console.log(therapist);
 
-    axios.post('http://localhost:5000/therapists/add', therapist)
+    axios.post('https://mern-stack-crud-3-tables.vercel.app//therapists/add', therapist)
       .then(res => console.log(res.data))
       .catch(error => console.log(error));
 

@@ -11,7 +11,7 @@ function TherapistsList(){
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(( ) => {
-    axios.get('http://localhost:5000/therapists/')
+    axios.get('https://mern-stack-crud-3-tables.vercel.app//therapists/')
     .then(response => {
       setTherapists(response.data);
     })
@@ -21,7 +21,7 @@ function TherapistsList(){
   }, []);
 
   function deleteTherapist(id) {
-    axios.delete('http://localhost:5000/therapists/'+id)
+    axios.delete('https://mern-stack-crud-3-tables.vercel.app//therapists/'+id)
       .then(response => { console.log(response.data)});
 
     setTherapists(therapists.filter(el => el._id !== id));
