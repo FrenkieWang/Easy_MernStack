@@ -11,7 +11,7 @@ function SessionsList(){
   const [isModalOpen, setIsModalOpen] = useState(false);
   
   useEffect(( ) => {
-    axios.get('https://mern-stack-crud-3-tables.vercel.app//sessions/')
+    axios.get('https://mern-stack-crud-3-tables-backend.vercel.app/sessions/')
     .then(response => {
       setSessions(response.data);
     })
@@ -21,7 +21,7 @@ function SessionsList(){
   }, []);
 
   function deleteSession(id) {
-    axios.delete('https://mern-stack-crud-3-tables.vercel.app//sessions/'+id)
+    axios.delete('https://mern-stack-crud-3-tables-backend.vercel.app/sessions/'+id)
       .then(response => { console.log(response.data)});
 
     setSessions(sessions.filter(el => el._id !== id));

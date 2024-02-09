@@ -30,7 +30,7 @@ function EditTherapist() {
   let { id } = useParams();
 
   useEffect(( ) => {
-    axios.get('https://mern-stack-crud-3-tables.vercel.app//therapists/'+ id)
+    axios.get('https://mern-stack-crud-3-tables-backend.vercel.app/therapists/'+ id)
       .then(response => {
         setTherapist(response.data);
       })
@@ -63,7 +63,7 @@ function EditTherapist() {
 
     console.log(therapist);
 
-    axios.post('https://mern-stack-crud-3-tables.vercel.app//therapists/update/' + id, therapist)
+    axios.post('https://mern-stack-crud-3-tables-backend.vercel.app/therapists/update/' + id, therapist)
       .then(res => console.log(res.data))
       .catch(error => console.log(error));
 

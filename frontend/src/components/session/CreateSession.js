@@ -30,7 +30,7 @@ function CreateSession() {
   useEffect(() => {
     const fetchClients = async () => {
       try {
-        const response = await axios.get('https://mern-stack-crud-3-tables.vercel.app//clients/');
+        const response = await axios.get('https://mern-stack-crud-3-tables-backend.vercel.app/clients/');
         setClients(response.data); 
       } catch (error) {
         console.error('Error fetching clients:', error);
@@ -43,7 +43,7 @@ function CreateSession() {
   useEffect(() => {
     const fetchTherapists = async () => {
       try {
-        const response = await axios.get('https://mern-stack-crud-3-tables.vercel.app//therapists/');
+        const response = await axios.get('https://mern-stack-crud-3-tables-backend.vercel.app/therapists/');
         setTherapists(response.data); 
       } catch (error) {
         console.error('Error fetching therapists:', error);
@@ -106,7 +106,7 @@ function CreateSession() {
   }
 
   const generateSession = async () => {
-    const response = await fetch('https://mern-stack-crud-3-tables.vercel.app//sessions/generate-session'); 
+    const response = await fetch('https://mern-stack-crud-3-tables-backend.vercel.app/sessions/generate-session'); 
     const data = await response.json();
 
     let sessionData = data;
@@ -176,7 +176,7 @@ function CreateSession() {
     
     console.log(submitData);
 
-    axios.post('https://mern-stack-crud-3-tables.vercel.app//sessions/add', submitData)
+    axios.post('https://mern-stack-crud-3-tables-backend.vercel.app/sessions/add', submitData)
       .then(res => console.log(res.data))
       .catch(error => console.log(error));
 

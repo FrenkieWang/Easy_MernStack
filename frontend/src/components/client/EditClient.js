@@ -50,7 +50,7 @@ function EditClient() {
   let { id } = useParams();
 
   useEffect(( ) => {
-    axios.get('https://mern-stack-crud-3-tables.vercel.app//clients/'+ id)
+    axios.get('https://mern-stack-crud-3-tables-backend.vercel.app/clients/'+ id)
       .then(response => {
         const clientData = response.data;
         // Get the Date without Time
@@ -98,7 +98,7 @@ function EditClient() {
     e.preventDefault();
     console.log(client);
 
-    axios.post('https://mern-stack-crud-3-tables.vercel.app//clients/update/' + id, client)
+    axios.post('https://mern-stack-crud-3-tables-backend.vercel.app/clients/update/' + id, client)
       .then(res => console.log(res.data))
       .catch(error => console.log(error));
 
