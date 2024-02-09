@@ -59,7 +59,7 @@ function SessionsList(){
             <th>Attendance</th>
             <th>Type</th>
             <th>Notes</th>
-            <th>Fee</th>
+            <th>Fee (€)</th>
             <th>Actions</th>
           </tr>
         </thead>

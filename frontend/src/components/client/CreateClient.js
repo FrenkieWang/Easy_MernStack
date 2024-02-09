@@ -98,7 +98,7 @@ function CreateClient() {
       .then(res => console.log(res.data))
       .catch(error => console.log(error));
 
-    window.location = '/client';
+    // window.location = '/client';
   }
 
   return (
