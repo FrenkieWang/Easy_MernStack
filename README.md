@@ -72,3 +72,10 @@ All work must be submitted via the upload link provided in Moodle (E: CS230[A]).
 
 The assignment submission is a document named **"summer-exam-coding-assignment-zip"** (containing your solution files together with any other resources used in the assignment solution). Please include a dump of the data from your database (as a text file) named **"database.txt"**. Please ensure that all external files use relatively directory referencing,  rather than 
  hard-coding the files' location. And ensure that you include your subdirectory files. **Do not include the node-modules directory.**
+
+# I have deployed the code in Vercel
+**Backend Server**
+ https://mern-stack-crud-3-tables-backend.vercel.app/
+
+**Frontend Website**
+ https://mern-stack-crud-3-tables-frontend.vercel.app/
