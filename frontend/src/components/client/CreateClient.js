@@ -95,10 +95,11 @@ function CreateClient() {
     console.log(client);
 
     axios.post('https://mern-stack-crud-3-tables-backend.vercel.app/clients/add', client)
-      .then(res => console.log(res.data))
+      .then(res => {
+        console.log(res.data);
+        window.location = '/client';
+      })
       .catch(error => console.log(error));
-
-    // window.location = '/client';
   }
 
   return (

@@ -58,10 +58,11 @@ function CreateTherapist() {
     console.log(therapist);
 
     axios.post('https://mern-stack-crud-3-tables-backend.vercel.app/therapists/add', therapist)
-      .then(res => console.log(res.data))
+      .then(res => {
+        console.log(res.data);
+        window.location = '/therapist';
+      })
       .catch(error => console.log(error));
-
-    window.location = '/therapist';
   }
 
   return (

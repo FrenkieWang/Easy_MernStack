@@ -136,10 +136,11 @@ function EditSession() {
     console.log(submitData);
 
     axios.post('https://mern-stack-crud-3-tables-backend.vercel.app/sessions/update/' + id, submitData)
-      .then(res => console.log(res.data))
+      .then(res => {
+        console.log(res.data);
+        window.location = '/session';
+      })
       .catch(error => console.log(error));
-
-    window.location = '/session';
   }
 
 
